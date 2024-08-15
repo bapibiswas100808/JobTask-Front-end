@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.background {
+  background-color: #f0f0f0;
+}
+.project-btn {
+  background-color: #72c3dc;
+  color: white;
+}
+.project-text {
+  color: #333333;
+}
+
+/* Primary: Navy Blue (#0A2540)
+Secondary: Sky Blue (#72C3DC)
+Accent: Bright Yellow (#FFB800)
+Background: Light Gray (#F0F0F0)
+Text: Dark Gray (#333333) */

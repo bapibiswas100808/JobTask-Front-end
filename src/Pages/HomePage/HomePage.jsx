@@ -1,8 +1,10 @@
+import AllProducts from "../../HomeComponents/AllProducts/AllProducts";
+
 const HomePage = () => {
   return (
-    <>
-      <h2>This is Homepage</h2>
-    </>
+    <div className="max-w-[1170px] mx-auto">
+      <AllProducts></AllProducts>
+    </div>
   );
 };
 
