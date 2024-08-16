@@ -1,6 +1,61 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const { signInUser, googleSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    signInUser(email, password)
+      .then((res) => {
+        console.log(res);
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Logged In Succesfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/");
+      })
+      .catch((err) => {
+        Swal.fire({
+          position: "top-center",
+          icon: "error",
+          title: `${err}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+  };
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then((res) => {
+        console.log(res);
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Logged In Succesfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/");
+      })
+      .catch((err) => {
+        Swal.fire({
+          position: "top-center",
+          icon: "error",
+          title: `${err}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+  };
   return (
     <div className="max-w-[1170px] mx-auto">
       <div className="hero bg-base-200 min-h-screen my-20">
@@ -15,7 +70,7 @@ const Login = () => {
             </p>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form className="card-body">
+            <form onSubmit={handleLogin} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -24,6 +79,7 @@ const Login = () => {
                   type="email"
                   placeholder="email"
                   className="input input-bordered"
+                  name="email"
                   required
                 />
               </div>
@@ -34,15 +90,27 @@ const Login = () => {
                 <input
                   type="password"
                   placeholder="password"
+                  name="password"
                   className="input input-bordered"
                   required
                 />
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button type="submit" className="btn btn-primary">
+                  Login
+                </button>
               </div>
             </form>
             <div className="pl-10 pb-10">
+              <p>
+                Sign In with
+                <button
+                  onClick={handleGoogleLogin}
+                  className="px-4 py-1 rounded-lg hover:bg-slate-400 project-btn ml-2"
+                >
+                  Google
+                </button>
+              </p>
               <p>New to Tech Point?</p>
               <p>
                 Please
