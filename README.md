@@ -1,19 +1,21 @@
-## Project Name : Tech Point
+# Tech Point
 
-## Live Link: https://mfs-project-a4f60.web.app/
+## Live Link
 
-## About My Project:
+[Tech Point Live](https://mfs-project-a4f60.web.app/)
 
-Tech Point project is a feature-rich tech store website developed with React. It includes advanced functionalities such as real-time search, server-side pagination, and robust filtering options by brand, category, and price range. Additionally, users can sort products by price and date, providing a seamless shopping experience.
+## About My Project
 
-## Technology Used:
+Tech Point is a feature-rich tech store website developed with React. It includes advanced functionalities such as real-time search, server-side pagination, and robust filtering options by brand, category, and price range. Additionally, users can sort products by price and date, providing a seamless shopping experience.
 
-React, Tailwind CSS, Google Firebase, MongoDB, Node Js, Express
+## Technology Used
 
-## Key Feature
+- React
+- Tailwind CSS
+- Google Firebase
 
--Advanced Filtering and Search: Users can filter products by brand, category, and price range, and perform real-time searches to find specific items easily.
+## Key Features
 
--Server-Side Pagination: Efficiently handles large data sets with server-side pagination, improving performance and user experience by loading products in manageable chunks.
-
--Sorting Options: Allows users to sort products by price (low to high, high to low) and by date added (newest to oldest), enhancing the browsing and shopping experience.
+- **Advanced Filtering and Search**: Users can filter products by brand, category, and price range, and perform real-time searches to find specific items easily.
+- **Server-Side Pagination**: Efficiently handles large data sets with server-side pagination, improving performance and user experience by loading products in manageable chunks.
+- **Sorting Options**: Allows users to sort products by price (low to high, high to low) and by date added (newest to oldest), enhancing the browsing and shopping experience.
