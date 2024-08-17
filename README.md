@@ -1,16 +1,16 @@
-# Project Name : Tech Point
+## Project Name : Tech Point
 
-# Live Link: https://mfs-project-a4f60.web.app/
+## Live Link: https://mfs-project-a4f60.web.app/
 
-# About My Project:
+## About My Project:
 
 Tech Point project is a feature-rich tech store website developed with React. It includes advanced functionalities such as real-time search, server-side pagination, and robust filtering options by brand, category, and price range. Additionally, users can sort products by price and date, providing a seamless shopping experience.
 
-# Technology Used:
+## Technology Used:
 
 React, Tailwind CSS, Google Firebase, MongoDB, Node Js, Express
 
-# Key Feature
+## Key Feature
 
 -Advanced Filtering and Search: Users can filter products by brand, category, and price range, and perform real-time searches to find specific items easily.
 
