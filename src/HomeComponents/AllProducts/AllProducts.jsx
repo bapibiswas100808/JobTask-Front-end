@@ -62,7 +62,7 @@ const AllProducts = () => {
   return (
     <div className="py-10 px-3 lg:px-0">
       <h2 className="text-2xl font-bold text-center mb-10">All Products</h2>
-      <div className="mb-6 flex justify-center gap-10">
+      <div className="mb-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-center gap-2 lg:gap-10">
         <input
           type="text"
           placeholder="Search by Product Name"
