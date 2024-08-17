@@ -1,15 +1,16 @@
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useDebounce } from "use-debounce";
 
 const AllProducts = () => {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [brand, setBrand] = useState("");
-  const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
+  const [category, setCategory] = useState("");
+  const [priceRange, setPriceRange] = useState("");
+
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["allProducts", page, brand],
+    queryKey: ["allProducts", page, searchTerm, brand, category, priceRange],
     queryFn: async () => {
       const res = await axios.get(`http://localhost:5000/allProducts`, {
         params: {
@@ -17,18 +18,22 @@ const AllProducts = () => {
           limit: 9,
           search: searchTerm,
           brand,
+          category,
+          priceRange,
         },
       });
       return res.data;
     },
     keepPreviousData: true,
   });
+
   useEffect(() => {
     setPage(1);
-  }, [searchTerm]);
+  }, [searchTerm, brand, category, priceRange]);
+
   useEffect(() => {
     refetch();
-  }, [debouncedSearchTerm, page, refetch]);
+  }, [page, searchTerm, brand, category, priceRange, refetch]);
 
   if (isLoading) {
     return (
@@ -37,37 +42,61 @@ const AllProducts = () => {
       </div>
     );
   }
+
   const allProducts = data?.data || [];
   const totalPages = data?.totalPages || 1;
 
   return (
     <div className="py-10 px-3 lg:px-0">
       <h2 className="text-2xl font-bold text-center mb-10">All Products</h2>
+
+      {/* Filter Options */}
       <div className="mb-6 flex justify-center gap-10">
         <input
           type="text"
           placeholder="Search by Product Name"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="input input-bordered"
+          className="input input-bordered mb-4"
         />
-        {/* select brand */}
+
         <select
           value={brand}
           onChange={(e) => setBrand(e.target.value)}
           className="select mb-4 border-2 border-gray-200"
         >
-          <option value="">All Brands</option>
+          <option value="">Select Brand</option>
           <option value="Microsoft">Microsoft</option>
           <option value="Asus">Asus</option>
           <option value="Apple">Apple</option>
           <option value="Google">Google</option>
           <option value="Dell">Dell</option>
-          <option value="HP">HP</option>
-          <option value="Samsung">Samsung</option>
-          <option value="Amazon">Amazon</option>
+        </select>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="select mb-4 border-2 border-gray-200"
+        >
+          <option value="">Select Category</option>
+          <option value="Laptops">Laptop</option>
+          <option value="Smartphones">Smartphone</option>
+          <option value="Cameras">Camera</option>
+          <option value="Headphones">Headphone</option>
+        </select>
+        <select
+          value={priceRange}
+          onChange={(e) => setPriceRange(e.target.value)}
+          className="select border-2 border-gray-200"
+        >
+          <option value="">Select Price Range</option>
+          <option value="0-100">0 - 100</option>
+          <option value="100-200">100 - 200</option>
+          <option value="200-500">200 - 500</option>
+          <option value="500-1000">500 - 1000</option>
+          <option value="1000-2000">1000 - 2000</option>
         </select>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {allProducts?.map((product, idx) => (
           <div className="w-full" key={idx}>
@@ -76,7 +105,7 @@ const AllProducts = () => {
                 <img
                   className="w-full"
                   src={product?.ProductImage}
-                  alt="Shoes"
+                  alt={product?.ProductName}
                 />
               </figure>
               <div className="card-body">
@@ -112,6 +141,7 @@ const AllProducts = () => {
           </div>
         ))}
       </div>
+
       <div className="flex justify-center mt-10">
         <button
           className="btn btn-secondary mr-4"
