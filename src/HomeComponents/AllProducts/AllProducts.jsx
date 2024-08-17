@@ -1,19 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const AllProducts = () => {
   const [page, setPage] = useState(1);
-  const { data, isLoading } = useQuery({
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["allProducts", page],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/allProducts?page=${page}&limit=9`
+        `http://localhost:5000/allProducts?page=${page}&limit=9&search=${searchTerm}`
       );
       return res.data;
     },
     keepPreviousData: true,
   });
+
+  useEffect(() => {
+    refetch();
+  }, [searchTerm, page, refetch]);
+
   if (isLoading) {
     return (
       <div className="text-center">
@@ -27,10 +34,19 @@ const AllProducts = () => {
   return (
     <div className="py-10 px-3 lg:px-0">
       <h2 className="text-2xl font-bold text-center mb-10">All Products</h2>
+      <div className="mb-6 text-center">
+        <input
+          type="text"
+          placeholder="Search by Product Name"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="input input-bordered"
+        />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {allProducts?.map((product, idx) => (
           <div className="w-full" key={idx}>
-            <div className="card card-compact bg-base-100 min-h-[600px]">
+            <div className="card card-compact bg-base-100 shadow-2xl min-h-[550px]">
               <figure>
                 <img
                   className="w-full"

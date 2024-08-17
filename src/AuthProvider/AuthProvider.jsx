@@ -6,7 +6,6 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  updateProfile,
 } from "firebase/auth";
 import axios from "axios";
 import auth from "../Firebase/firebase.config";
@@ -32,15 +31,6 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
-  //   update user
-  const updateUserProfile = (name, photo) => {
-    setLoading(true);
-    return updateProfile(auth.currentUser, {
-      displayName: name,
-      photoURL: photo,
-    });
-  };
-
   //   log out
   const logOut = () => {
     setLoading(true);
@@ -76,12 +66,10 @@ const AuthProvider = ({ children }) => {
   }, []);
   const authInfo = {
     user,
-    setUser,
     loading,
     createUser,
     signInUser,
     logOut,
-    updateUserProfile,
     googleSignIn,
   };
   return (
