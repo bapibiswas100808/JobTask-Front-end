@@ -60,7 +60,7 @@ const AllProducts = () => {
   const totalPages = data?.totalPages || 1;
 
   return (
-    <div className="py-10 px-3 lg:px-0">
+    <div className="py-10 px-3 lg:px-0 min-h-screen">
       <h2 className="text-2xl font-bold text-center mb-10">All Products</h2>
       <div className="mb-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-center gap-2 lg:gap-10">
         <input
@@ -138,10 +138,10 @@ const AllProducts = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {allProducts?.map((product, idx) => (
               <div className="w-full" key={idx}>
-                <div className="card card-compact bg-base-100 shadow-2xl min-h-[550px]">
+                <div className="card card-compact bg-base-100 shadow-2xl min-h-[580px]">
                   <figure>
                     <img
-                      className="w-full"
+                      className="w-full min-h-[250px]"
                       src={product?.ProductImage}
                       alt="Shoes"
                     />

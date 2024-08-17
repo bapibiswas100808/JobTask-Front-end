@@ -96,7 +96,7 @@ const Register = () => {
                 />
               </div>
               <div className="form-control mt-6">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn project-btn">
                   Register
                 </button>
               </div>
@@ -106,7 +106,7 @@ const Register = () => {
                 Register with
                 <button
                   onClick={handleGoogleLogin}
-                  className="px-4 py-1 rounded-lg hover:bg-slate-400 project-btn ml-2"
+                  className="px-4 py-1 rounded-lg  project-btn ml-2"
                 >
                   Google
                 </button>
@@ -114,7 +114,10 @@ const Register = () => {
               <p>Already Registered?</p>
               <p>
                 Please
-                <Link to="/login" className="text-blue-400 underline ml-2">
+                <Link
+                  to="/login"
+                  className="text-blue-400 hover:text-blue-700 underline ml-2"
+                >
                   Login Here
                 </Link>
               </p>

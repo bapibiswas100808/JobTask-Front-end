@@ -96,7 +96,7 @@ const Login = () => {
                 />
               </div>
               <div className="form-control mt-6">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn project-btn">
                   Login
                 </button>
               </div>
@@ -106,7 +106,7 @@ const Login = () => {
                 Sign In with
                 <button
                   onClick={handleGoogleLogin}
-                  className="px-4 py-1 rounded-lg hover:bg-slate-400 project-btn ml-2"
+                  className="px-4 py-1 rounded-lg project-btn project-btn ml-2"
                 >
                   Google
                 </button>
@@ -114,7 +114,10 @@ const Login = () => {
               <p>New to Tech Point?</p>
               <p>
                 Please
-                <Link to="/register" className="text-blue-400 underline ml-2">
+                <Link
+                  to="/register"
+                  className="text-blue-400 hover:text-blue-700 underline ml-2"
+                >
                   Register Here
                 </Link>
               </p>

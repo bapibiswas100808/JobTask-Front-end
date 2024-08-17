@@ -3,11 +3,15 @@
 @tailwind utilities;
 
 .background {
-  background-color: #f0f0f0;
+  background-color: #040053;
 }
 .project-btn {
-  background-color: #72c3dc;
+  background-color: hsl(0, 93%, 32%);
   color: white;
+  border: 0;
+}
+.project-btn:hover {
+  background-color: blue;
 }
 .project-text {
   color: #333333;
