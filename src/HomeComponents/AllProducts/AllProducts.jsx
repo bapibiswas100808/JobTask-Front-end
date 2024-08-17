@@ -23,28 +23,31 @@ const AllProducts = () => {
       dateSortOrder,
     ],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/allProducts`, {
-        params: {
-          page,
-          limit: 9,
-          search: searchTerm,
-          brand,
-          category,
-          priceRange,
-          priceSortOrder,
-          dateSortOrder,
-        },
-      });
+      const res = await axios.get(
+        `https://job-task-server-snowy.vercel.app/allProducts`,
+        {
+          params: {
+            page,
+            limit: 9,
+            search: searchTerm,
+            brand,
+            category,
+            priceRange,
+            priceSortOrder,
+            dateSortOrder,
+          },
+        }
+      );
       return res.data;
     },
     keepPreviousData: true,
   });
   useEffect(() => {
     setPage(1);
-  }, [searchTerm]);
+  }, [searchTerm, brand, category, priceRange]);
   useEffect(() => {
     refetch();
-  }, [debouncedSearchTerm, page, refetch]);
+  }, [debouncedSearchTerm, page, brand, category, priceRange, refetch]);
 
   if (isLoading) {
     return (
