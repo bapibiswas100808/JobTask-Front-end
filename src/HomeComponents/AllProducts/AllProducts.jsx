@@ -8,9 +8,10 @@ const AllProducts = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
+  const [priceRange, setPriceRange] = useState("");
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["allProducts", page, brand, category],
+    queryKey: ["allProducts", page, brand, category, priceRange],
     queryFn: async () => {
       const res = await axios.get(`http://localhost:5000/allProducts`, {
         params: {
@@ -19,6 +20,7 @@ const AllProducts = () => {
           search: searchTerm,
           brand,
           category,
+          priceRange,
         },
       });
       return res.data;
@@ -79,6 +81,18 @@ const AllProducts = () => {
           <option value="Smartphones">Smartphone</option>
           <option value="Cameras">Camera</option>
           <option value="Headphones">Headphone</option>
+        </select>
+        <select
+          value={priceRange}
+          onChange={(e) => setPriceRange(e.target.value)}
+          className="select border-2 border-gray-200"
+        >
+          <option value="">Select Price Range</option>
+          <option value="0-100">0 - 100</option>
+          <option value="100-200">100 - 200</option>
+          <option value="200-500">200 - 500</option>
+          <option value="500-1000">500 - 1000</option>
+          <option value="1000-2000">1000 - 2000</option>
         </select>
       </div>
       <div className="">
