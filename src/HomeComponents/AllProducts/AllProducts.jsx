@@ -9,9 +9,19 @@ const AllProducts = () => {
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [priceRange, setPriceRange] = useState("");
+  const [priceSortOrder, setPriceSortOrder] = useState("");
+  const [dateSortOrder, setDateSortOrder] = useState("");
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["allProducts", page, brand, category, priceRange],
+    queryKey: [
+      "allProducts",
+      page,
+      brand,
+      category,
+      priceRange,
+      priceSortOrder,
+      dateSortOrder,
+    ],
     queryFn: async () => {
       const res = await axios.get(`http://localhost:5000/allProducts`, {
         params: {
@@ -21,6 +31,8 @@ const AllProducts = () => {
           brand,
           category,
           priceRange,
+          priceSortOrder,
+          dateSortOrder,
         },
       });
       return res.data;
@@ -71,6 +83,7 @@ const AllProducts = () => {
           <option value="Samsung">Samsung</option>
           <option value="Amazon">Amazon</option>
         </select>
+        {/* select category */}
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
@@ -82,6 +95,7 @@ const AllProducts = () => {
           <option value="Cameras">Camera</option>
           <option value="Headphones">Headphone</option>
         </select>
+        {/* select price range */}
         <select
           value={priceRange}
           onChange={(e) => setPriceRange(e.target.value)}
@@ -93,6 +107,27 @@ const AllProducts = () => {
           <option value="200-500">200 - 500</option>
           <option value="500-1000">500 - 1000</option>
           <option value="1000-2000">1000 - 2000</option>
+          <option value="2000-5000">2000 - 5000</option>
+        </select>
+        {/* Sorting by price */}
+        <select
+          value={priceSortOrder}
+          onChange={(e) => setPriceSortOrder(e.target.value)}
+          className="select border-2 border-gray-200"
+        >
+          <option value="">Sort by Price</option>
+          <option value="asc">Low to High</option>
+          <option value="desc">High to Low</option>
+        </select>
+        {/* sorting by date */}
+        <select
+          value={dateSortOrder}
+          onChange={(e) => setDateSortOrder(e.target.value)}
+          className="select border-2 border-gray-200"
+        >
+          <option value="">Sort by Date</option>
+          <option value="asc">Oldest First</option>
+          <option value="desc">Newest First</option>
         </select>
       </div>
       <div className="">
