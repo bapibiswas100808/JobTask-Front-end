@@ -7,9 +7,10 @@ const AllProducts = () => {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [brand, setBrand] = useState("");
+  const [category, setCategory] = useState("");
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["allProducts", page, brand],
+    queryKey: ["allProducts", page, brand, category],
     queryFn: async () => {
       const res = await axios.get(`http://localhost:5000/allProducts`, {
         params: {
@@ -17,6 +18,7 @@ const AllProducts = () => {
           limit: 9,
           search: searchTerm,
           brand,
+          category,
         },
       });
       return res.data;
@@ -67,50 +69,75 @@ const AllProducts = () => {
           <option value="Samsung">Samsung</option>
           <option value="Amazon">Amazon</option>
         </select>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="select mb-4 border-2 border-gray-200"
+        >
+          <option value="">All Category</option>
+          <option value="Laptops">Laptop</option>
+          <option value="Smartphones">Smartphone</option>
+          <option value="Cameras">Camera</option>
+          <option value="Headphones">Headphone</option>
+        </select>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {allProducts?.map((product, idx) => (
-          <div className="w-full" key={idx}>
-            <div className="card card-compact bg-base-100 shadow-2xl min-h-[550px]">
-              <figure>
-                <img
-                  className="w-full"
-                  src={product?.ProductImage}
-                  alt="Shoes"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">{product.ProductName}</h2>
-                <p>{product.Description}</p>
-                <div className="flex justify-between items-center my-5">
-                  <p>
-                    <span className="text-md font-semibold pr-2">Price:</span>$
-                    {product.Price}
-                  </p>
-                  <p>
-                    <span className="text-md font-semibold pr-2">
-                      Category:
-                    </span>
-                    {product.Category}
-                  </p>
-                </div>
-                <div className="flex justify-between items-center mb-5">
-                  <p>
-                    <span className="text-md font-semibold pr-2">Rating:</span>
-                    {product.Ratings}
-                  </p>
-                  <p>
-                    <span className="text-md font-semibold pr-2">Date:</span>
-                    {product.ProductCreationDate}
-                  </p>
-                </div>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
+      <div className="">
+        {allProducts?.length ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {allProducts?.map((product, idx) => (
+              <div className="w-full" key={idx}>
+                <div className="card card-compact bg-base-100 shadow-2xl min-h-[550px]">
+                  <figure>
+                    <img
+                      className="w-full"
+                      src={product?.ProductImage}
+                      alt="Shoes"
+                    />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">{product.ProductName}</h2>
+                    <p>{product.Description}</p>
+                    <div className="flex justify-between items-center my-5">
+                      <p>
+                        <span className="text-md font-semibold pr-2">
+                          Price:
+                        </span>
+                        ${product.Price}
+                      </p>
+                      <p>
+                        <span className="text-md font-semibold pr-2">
+                          Category:
+                        </span>
+                        {product.Category}
+                      </p>
+                    </div>
+                    <div className="flex justify-between items-center mb-5">
+                      <p>
+                        <span className="text-md font-semibold pr-2">
+                          Rating:
+                        </span>
+                        {product.Ratings}
+                      </p>
+                      <p>
+                        <span className="text-md font-semibold pr-2">
+                          Date:
+                        </span>
+                        {product.ProductCreationDate}
+                      </p>
+                    </div>
+                    <div className="card-actions justify-end">
+                      <button className="btn btn-primary">Buy Now</button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
+        ) : (
+          <h2 className="text-2xl text-center font-bold">
+            No Product Available
+          </h2>
+        )}
       </div>
       <div className="flex justify-center mt-10">
         <button
