@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 const Register = () => {
   const { createUser, googleSignIn } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  // Register
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -33,6 +35,8 @@ const Register = () => {
         });
       });
   };
+
+  // Register with google
   const handleGoogleLogin = () => {
     googleSignIn()
       .then((res) => {
@@ -72,6 +76,7 @@ const Register = () => {
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <form onSubmit={handleRegister} className="card-body">
               <div className="form-control">
+                {/* Email */}
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
@@ -84,6 +89,7 @@ const Register = () => {
                 />
               </div>
               <div className="form-control">
+                {/* Password */}
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>

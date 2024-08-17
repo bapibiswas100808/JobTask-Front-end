@@ -133,6 +133,8 @@ const AllProducts = () => {
           <option value="desc">Newest First</option>
         </select>
       </div>
+
+      {/* Show all Profucts */}
       <div className="">
         {allProducts?.length ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -191,6 +193,8 @@ const AllProducts = () => {
           </h2>
         )}
       </div>
+
+      {/* Pagination Buttons */}
       <div className="flex justify-center mt-10">
         <button
           className="btn btn-secondary mr-4"
